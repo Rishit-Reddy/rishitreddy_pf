@@ -6,8 +6,7 @@ import "../styles/divider.css";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
 import PageLoader from "@/components/sections/PageLoader";
 import HeroSection from "@/components/sections/HeroSection"
-import Hero from "@/layouts/Hero.astro";
-import Experience from "@/layouts/Experience.astro";
+import ExperienceSection from "@/components/sections/ExperienceSection"
 import { Toaster } from "@/components/ui/sonner"
 import HeaderDock from "@/components/react/HeaderDock";
 import MainNavigation from "@/components/react/MainNavigation";
@@ -19,7 +18,9 @@ import { Separator } from "@/components/ui/separator";
     <MainNavigation client:load />
     <Toaster client:idle/>
     <div class="w-full">
-      <Hero client:load/>
+      <section id="herosection" class="relative min-h-[60vh] md:min-h-[75vh] flex items-end md:items-end pt-4 md:pt-0">
+        <HeroSection client:load />
+      </section>
     </div>
     
     <!-- Full-width divider that breaks out of container -->
@@ -29,10 +30,10 @@ import { Separator } from "@/components/ui/separator";
       </div>
     </div>
 
+    <section id="experience" class="relative min-h-[40vh] md:min-h-[50vh] w-full py-10">
+      <ExperienceSection client:visible />
+    </section>
     
-    <Experience />
-    
-
     <HeaderDock client:idle/>
   </PageLoader>
 </DefaultLayout>
