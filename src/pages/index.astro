@@ -1,25 +1,38 @@
 ---
-import '../styles/global.css';
-// Component Imports
-import Button from '../components/Button.astro';
+import "../styles/global.css";
+import "../styles/divider.css";
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+// Component Imports
+import DefaultLayout from "@/layouts/DefaultLayout.astro";
+import PageLoader from "@/components/sections/PageLoader";
+import HeroSection from "@/components/sections/HeroSection"
+import Hero from "@/layouts/Hero.astro";
+import Experience from "@/layouts/Experience.astro";
+import { Toaster } from "@/components/ui/sonner"
+import HeaderDock from "@/components/react/HeaderDock";
+import MainNavigation from "@/components/react/MainNavigation";
+import { Separator } from "@/components/ui/separator";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro + TailwindCSS</title>
-	</head>
+<DefaultLayout>
+  <PageLoader client:load>
+    <MainNavigation client:load />
+    <Toaster client:idle/>
+    <div class="w-full">
+      <Hero client:load/>
+    </div>
+    
+    <!-- Full-width divider that breaks out of container -->
+    <div class="relative w-full">
+      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
+        <Separator className="h-[2px] bg-border/80" client:load />
+      </div>
+    </div>
 
-	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-		</div>
-	</body>
-</html>
+    
+    <Experience />
+    
+
+    <HeaderDock client:idle/>
+  </PageLoader>
+</DefaultLayout>

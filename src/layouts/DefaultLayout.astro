@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import HeaderDock from '@/components/react/HeaderDock';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>Rishit Reddy</title>
+		<script src="/js/smooth-scroll.js" defer></script>
+	</head>
+	<body class="min-h-screen bg-background text-foreground">
+		<main class="w-full max-w-screen-2xl mx-auto">
+			<!-- Content container with responsive widths -->
+			<div class="w-[90%] sm:w-[85%] md:w-[85%] lg:w-[80%] xl:w-[75%] mx-auto">
+				<slot />
+			</div>
+		</main>
+	</body>
+</html>
+
+<style>
+	/* This ensures our layout takes precedence */
+	:global(#herosection) {
+		width: 100% !important;
+	}
+	:global(#experience) {
+		width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+	:global(section) {
+		width: 100% !important;
+	}
+	
+	/* Mobile-specific overrides */
+	@media (max-width: 768px) {
+		:global(#herosection) {
+			padding-top: 0 !important;
+			margin-top: 0 !important;
+			min-height: calc(90vh - 48px) !important; /* Adjust for dock height */
+		}
+		:global(#herosection .relative) {
+			overflow: hidden;
+		}
+	}
+	
+	/* Ensure long names don't wrap in hero section */
+	:global(#herosection h1) {
+		overflow-wrap: normal;
+		word-break: keep-all;
+	}
+</style>

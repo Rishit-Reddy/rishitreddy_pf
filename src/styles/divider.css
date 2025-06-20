@@ -1,0 +1,9 @@
+/* This CSS creates a full-width divider that ignores any parent container constraints */
+.full-width-divider {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
