@@ -7,6 +7,7 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
 import PageLoader from "@/components/sections/PageLoader";
 import HeroSection from "@/components/sections/HeroSection"
 import ExperienceSection from "@/components/sections/ExperienceSection"
+import SkillsSection from "@/components/sections/SkillsSection"
 import { Toaster } from "@/components/ui/sonner"
 import HeaderDock from "@/components/react/HeaderDock";
 import MainNavigation from "@/components/react/MainNavigation";
@@ -32,6 +33,17 @@ import { Separator } from "@/components/ui/separator";
 
     <section id="experience" class="relative min-h-[40vh] md:min-h-[50vh] w-full py-10">
       <ExperienceSection client:visible />
+    </section>
+    
+    <!-- Full-width divider that breaks out of container -->
+    <div class="relative w-full">
+      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
+        <Separator className="h-[2px] bg-border/80" client:load />
+      </div>
+    </div>
+    
+    <section id="skills" class="relative w-full">
+      <SkillsSection client:visible />
     </section>
     
     <HeaderDock client:idle/>

@@ -22,8 +22,7 @@ const EMAIL = "rishitpalle@gmail.com"
 
 const getData = (theme: "light" | "dark" | null) => ({
   navbar: [
-    { href: "#herosection", icon: HomeIcon, label: "Home" },
-  ],
+    { href: "#herosection", icon: HomeIcon, label: "Home" },  ],
   social: [
     {
       name: "GitHub",

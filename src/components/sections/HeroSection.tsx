@@ -39,7 +39,7 @@ export default function Hero() {
               height={25}
               className={cn(
                 "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
-                "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
+                "inset-x-0 inset-y-[-30%] h-[250%] skew-y-12"
               )}
               numSquares={60}
               maxOpacity={0.3}
@@ -64,7 +64,7 @@ export default function Hero() {
           
           <div className="mt-2">
             <ColoredTypingAnimation 
-              className="text-xs text-muted-foreground"
+              className="text-sm text-muted-foreground"
               delay={1000}
               duration={13}
               segments={[
