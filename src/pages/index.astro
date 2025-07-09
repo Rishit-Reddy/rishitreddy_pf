@@ -12,6 +12,12 @@ import { Toaster } from "@/components/ui/sonner"
 import HeaderDock from "@/components/react/HeaderDock";
 import MainNavigation from "@/components/react/MainNavigation";
 import { Separator } from "@/components/ui/separator";
+import { getBlogPosts, getPostBySlug } from "@/lib/contentful";
+
+// SEO Meta Data
+const title = "Rishit Reddy - Full Stack Developer & Software Engineer";
+const description = "Full Stack Developer specializing in modern web technologies. Expert in React, Node.js, TypeScript, and cloud solutions. Explore my projects, blog, and professional experience.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <DefaultLayout>

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://rishitreddy.com/sitemap-index.xml
+
+# Disallow specific paths (if any)
+# Disallow: /admin/
+# Disallow: /private/

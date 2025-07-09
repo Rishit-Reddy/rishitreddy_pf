@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Dock, DockIcon } from "@/components/magicui/dock"
-import { HomeIcon, Clipboard, Check } from "lucide-react"
+import { HomeIcon, Clipboard, Check, BookOpen } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
@@ -22,7 +22,9 @@ const EMAIL = "rishitpalle@gmail.com"
 
 const getData = (theme: "light" | "dark" | null) => ({
   navbar: [
-    { href: "#herosection", icon: HomeIcon, label: "Home" },  ],
+    { href: "#herosection", icon: HomeIcon, label: "Home" },
+    { href: "/blog", icon: BookOpen, label: "Blog" },
+  ],
   social: [
     {
       name: "GitHub",

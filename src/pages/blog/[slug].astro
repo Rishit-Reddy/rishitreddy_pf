@@ -1,0 +1,269 @@
+---
+import { getBlogPosts, getPostBySlug } from "@/lib/contentful";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import RichTextRenderer from "@/components/RichTextRenderer";
+
+export async function getStaticPaths() {
+    const posts = await getBlogPosts();
+
+    return posts.map((post) => ({
+        params: { slug: post.fields.slug },
+        props: { slug: post.fields.slug },
+    }));
+}
+
+const { slug } = Astro.props;
+const post = await getPostBySlug(slug as string);
+
+if (!post) {
+    return Astro.redirect("/blog");
+}
+
+// Debug: Log the individual post structure
+console.log('=== INDIVIDUAL POST RESPONSE ===');
+console.log('Full post data:', JSON.stringify(post, null, 2));
+
+// SEO data preparation
+const title = `${post.fields.title} | Rishit Reddy's Blog`;
+const description = post.fields.excerpt || `Read "${post.fields.title}" on Rishit Reddy's blog. Insights on web development, technology, and software engineering.`;
+const heroImageUrl = post.fields.hero_Image?.fields?.image?.fields?.file?.url 
+    ? `https:${post.fields.hero_Image.fields.image.fields.file.url}`
+    : "/profile-image.png";
+const publishedDate = post.fields.publishedDate ? new Date(post.fields.publishedDate).toISOString() : undefined;
+const tags = (post.fields as any).tags || [];
+---
+
+<BlogLayout 
+    title={title}
+    description={description}
+    image={heroImageUrl}
+    publishedDate={publishedDate}
+    tags={tags}
+    slug={slug}
+>
+    <article class="max-w-4xl mx-auto py-8" itemscope itemtype="https://schema.org/BlogPosting">
+        {/* Header */}
+        <header class="mb-8">
+            <div class="mb-4">
+                <a 
+                    href="/blog" 
+                    class="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                >
+                    ← Back to Blog
+                </a>
+            </div>
+            
+            {/* Hero Image - smaller size, positioned above title */}
+            {post.fields.hero_Image?.fields?.image?.fields?.file?.url && (
+                <div class="w-full aspect-video rounded-lg overflow-hidden mb-3">
+                    <img
+                        src={`https:${encodeURI(post.fields.hero_Image.fields.image.fields.file.url)}`}
+                        alt={
+                            post.fields.hero_Image.fields.altName ||
+                            post.fields.hero_Image.fields.image.fields.title ||
+                            post.fields.hero_Image.fields.image.fields.description ||
+                            "Hero image"
+                        }
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="high"
+                        itemprop="image"
+                    />
+                </div>
+            )}
+            
+            <h1 
+                class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 leading-tight"
+                itemprop="headline"
+            >
+                {post.fields.title}
+            </h1>
+            
+            {post.fields.publishedDate && (
+                <div class="flex items-center gap-4 text-muted-foreground text-sm mb-2">
+                    <time 
+                        datetime={new Date(post.fields.publishedDate).toISOString()}
+                        itemprop="datePublished"
+                        class="text-lg"
+                    >
+                        {new Date(post.fields.publishedDate).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}
+                    </time>
+                    <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name" class="sr-only">Rishit Reddy</span>
+                    </span>
+                </div>
+            )}
+            
+            {/* Tags */}
+            {(post.fields as any).tags && (post.fields as any).tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-4">
+                    {(post.fields as any).tags.map((tag: string) => (
+                        <span 
+                            class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-md"
+                            itemprop="keywords"
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            )}
+        </header>
+
+        {/* Content */}
+        <div itemprop="articleBody">
+            <RichTextRenderer document={post.fields.body} client:load />
+        </div>
+        
+        {/* Hidden schema.org data */}
+        <meta itemprop="description" content={description} />
+        <meta itemprop="dateModified" content={publishedDate || new Date().toISOString()} />
+    </article>
+</BlogLayout>
+
+<style>
+:global(.prose) {
+  color: hsl(var(--foreground));
+  line-height: 1.7;
+}
+
+:global(.prose h1),
+:global(.prose h2),
+:global(.prose h3),
+:global(.prose h4),
+:global(.prose h5),
+:global(.prose h6) {
+  color: hsl(var(--foreground));
+  line-height: 1.3;
+}
+
+:global(.prose h1) {
+  font-size: 2.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+:global(.prose h1:first-child) {
+  margin-top: 0;
+}
+
+:global(.prose h2) {
+  font-size: 1.875rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+:global(.prose h2:first-child) {
+  margin-top: 0;
+}
+
+:global(.prose h3) {
+  font-size: 1.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+:global(.prose h3:first-child) {
+  margin-top: 0;
+}
+
+:global(.prose p) {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+
+:global(.prose ul),
+:global(.prose ol) {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+:global(.prose li) {
+  margin-bottom: 0.25rem;
+  line-height: 1.6;
+}
+
+:global(.prose ul) {
+  list-style-position: outside;
+}
+
+:global(.prose ol) {
+  list-style-position: outside;
+}
+
+:global(.prose a) {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+:global(.prose a:hover) {
+  text-decoration: underline;
+  color: hsl(var(--primary) / 0.8);
+}
+
+:global(.prose code) {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:global(.prose pre) {
+  background-color: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  padding: 1.5rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:global(.prose blockquote) {
+  border-left: 4px solid hsl(var(--primary));
+  background-color: hsl(var(--muted) / 0.3);
+  padding: 0.75rem 1rem 0.75rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 0.375rem 0.375rem 0;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+  position: relative;
+}
+
+:global(.dark .prose blockquote) {
+  background-color: hsl(var(--muted) / 0.5);
+  color: hsl(var(--muted-foreground));
+}
+
+:global(.prose blockquote p) {
+  margin-bottom: 0.5rem;
+}
+
+:global(.prose blockquote p:last-child) {
+  margin-bottom: 0;
+}
+
+:global(.prose hr) {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid hsl(var(--border));
+}
+
+:global(.prose strong) {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+:global(.prose em) {
+  font-style: italic;
+  color: hsl(var(--muted-foreground));
+}
+</style>
+</style>
+

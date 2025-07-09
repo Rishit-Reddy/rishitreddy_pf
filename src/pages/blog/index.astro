@@ -1,0 +1,16 @@
+---
+import { getBlogPosts } from '@/lib/contentful';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import BlogListing from '@/components/react/BlogListing';
+
+const posts = await getBlogPosts();
+
+// Debug: Log the entire posts response
+console.log('=== BLOG POSTS RESPONSE ===');
+console.log('Posts array length:', posts?.length || 0);
+console.log('Full posts data:', JSON.stringify(posts, null, 2));
+---
+
+<BlogLayout>
+  <BlogListing posts={posts} client:load />
+</BlogLayout>
