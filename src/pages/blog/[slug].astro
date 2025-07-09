@@ -19,10 +19,6 @@ if (!post) {
     return Astro.redirect("/blog");
 }
 
-// Debug: Log the individual post structure
-console.log('=== INDIVIDUAL POST RESPONSE ===');
-console.log('Full post data:', JSON.stringify(post, null, 2));
-
 // SEO data preparation
 const title = `${post.fields.title} | Rishit Reddy's Blog`;
 const description = post.fields.excerpt || `Read "${post.fields.title}" on Rishit Reddy's blog. Insights on web development, technology, and software engineering.`;
