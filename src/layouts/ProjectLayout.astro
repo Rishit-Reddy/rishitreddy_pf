@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import Navigation from '@/components/react/Navigation';
+
+export interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	author?: string;
+	tags?: string[];
+	slug?: string;
+}
+
+const {
+	title = "Projects - Rishit Reddy",
+	description = "Explore my portfolio of projects, ranging from web applications to machine learning experiments. See what I've been building with modern technologies.",
+	image = "/profile-image.png",
+	author = "Rishit Reddy",
+	tags = [],
+	slug = ""
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="author" content={author} />
+		<link rel="canonical" href={canonicalURL} />
+		
+		<!-- Keywords -->
+		{tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:site_name" content="Rishit Reddy" />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={canonicalURL} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={ogImage} />
+		<meta property="twitter:creator" content="@rishitreddy" />
+		
+		<!-- JSON-LD Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "ItemList",
+			"name": "Rishit Reddy's Projects",
+			"description": description,
+			"url": canonicalURL.toString(),
+			"author": {
+				"@type": "Person",
+				"name": author,
+				"url": "https://rishitreddy.com"
+			},
+			"publisher": {
+				"@type": "Person",
+				"name": author,
+				"url": "https://rishitreddy.com"
+			}
+		})} />
+		
+		<script src="/js/smooth-scroll.js" defer></script>
+	</head>
+	<body class="min-h-screen bg-background text-foreground">
+		<!-- Project Navigation -->
+		<Navigation client:load />
+		
+		<!-- Main Content with same padding as DefaultLayout -->
+		<main class="w-full max-w-screen-2xl mx-auto">
+			<div class="w-[90%] sm:w-[85%] md:w-[85%] lg:w-[80%] xl:w-[75%] mx-auto">
+				<slot />
+			</div>
+		</main>
+	</body>
+</html>
+
+<style>
+	/* Ensure consistent styling with main layout */
+	:global(section) {
+		width: 100% !important;
+	}
+</style>

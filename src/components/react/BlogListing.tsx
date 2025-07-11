@@ -8,6 +8,7 @@ interface BlogPost {
     slug: string;
     excerpt: string;
     publishedDate?: string;
+    tags?: string[];
     hero_Image?: {
       fields: {
         image: {

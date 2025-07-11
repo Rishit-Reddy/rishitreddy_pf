@@ -1,0 +1,15 @@
+---
+import { getProjects } from '@/lib/contentful';
+import ProjectLayout from '@/layouts/ProjectLayout.astro';
+import ProjectListing from '@/components/react/ProjectListing';
+
+const projects = await getProjects();
+
+// SEO Meta Data
+const title = "Projects - Rishit Reddy";
+const description = "A collection of projects I've built, ranging from web applications to machine learning experiments. Explore my work in React, Node.js, Python, and more.";
+---
+
+<ProjectLayout title={title} description={description}>
+  <ProjectListing projects={projects} client:load />
+</ProjectLayout>

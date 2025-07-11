@@ -6,7 +6,7 @@ import { ColoredTypingAnimation } from "@/components/magicui/colored-typing-anim
 
 export default function Hero() {
   const navItems = [
-    { label: "About", href: "#about" },
+    // { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
     { label: "Experience", href: "#experience" },
     { label: "Skills", href: "#skills" },

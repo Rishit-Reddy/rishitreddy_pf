@@ -4,6 +4,7 @@ interface BlogPost {
     slug: string;
     excerpt: string;
     publishedDate?: string;
+    tags?: string[];
     hero_Image?: {
       fields: {
         image: {
@@ -27,7 +28,7 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ post, variant = 'square' }: BlogCardProps) {
-  const { title, slug, excerpt, publishedDate, hero_Image } = post.fields;
+  const { title, slug, excerpt, publishedDate, hero_Image, tags } = post.fields;
 
   if (variant === 'horizontal') {
     return (
@@ -56,6 +57,20 @@ export default function BlogCard({ post, variant = 'square' }: BlogCardProps) {
                   <p className="text-muted-foreground mb-4 line-clamp-2 leading-relaxed text-sm">
                     {excerpt}
                   </p>
+                )}
+
+                {/* Tags */}
+                {tags && tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 )}
               </div>
               
@@ -106,6 +121,20 @@ export default function BlogCard({ post, variant = 'square' }: BlogCardProps) {
             <p className="text-muted-foreground mb-4 line-clamp-3 leading-relaxed">
               {excerpt}
             </p>
+          )}
+
+          {/* Tags */}
+          {tags && tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-200"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           )}
           
           <div className="flex items-center justify-between">

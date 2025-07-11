@@ -7,17 +7,22 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
 import PageLoader from "@/components/sections/PageLoader";
 import HeroSection from "@/components/sections/HeroSection"
 import ExperienceSection from "@/components/sections/ExperienceSection"
+import ProjectSection from "@/components/sections/ProjectSection"
 import SkillsSection from "@/components/sections/SkillsSection"
+import ContactSection from "@/components/sections/ContactSection"
 import { Toaster } from "@/components/ui/sonner"
 import HeaderDock from "@/components/react/HeaderDock";
 import MainNavigation from "@/components/react/MainNavigation";
 import { Separator } from "@/components/ui/separator";
-import { getBlogPosts, getPostBySlug } from "@/lib/contentful";
+import { getBlogPosts, getPostBySlug, getProjects } from "@/lib/contentful";
 
 // SEO Meta Data
 const title = "Rishit Reddy - Full Stack Developer & Software Engineer";
 const description = "Full Stack Developer specializing in modern web technologies. Expert in React, Node.js, TypeScript, and cloud solutions. Explore my projects, blog, and professional experience.";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Fetch data
+const projects = await getProjects();
 ---
 
 <DefaultLayout>
@@ -48,9 +53,38 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </div>
     </div>
     
+    <section id="projects" class="relative min-h-[40vh] md:min-h-[50vh] w-full py-10">
+      <ProjectSection projects={projects} client:visible />
+    </section>
+
+    <!-- Full-width divider that breaks out of container -->
+    <div class="relative w-full">
+      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
+        <Separator className="h-[2px] bg-border/80" client:load />
+      </div>
+    </div>
+
     <section id="skills" class="relative w-full">
       <SkillsSection client:visible />
     </section>
+    
+    <!-- Full-width divider that breaks out of container -->
+    <div class="relative w-full">
+      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
+        <Separator className="h-[2px] bg-border/80" client:load />
+      </div>
+    </div>
+
+    <section id="contact" class="relative w-full">
+      <ContactSection client:visible />
+    </section>
+    
+    <!-- Full-width divider that breaks out of container -->
+    <div class="relative w-full">
+      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
+        <Separator className="h-[2px] bg-border/80" client:load />
+      </div>
+    </div>
     
     <HeaderDock client:idle/>
   </PageLoader>
