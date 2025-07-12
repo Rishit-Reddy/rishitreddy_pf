@@ -43,6 +43,7 @@ interface ProjectFields {
   excerpt: string;
   technologies?: string[];
   projectType?: string;
+  projectCategory?: string;
   institution?: string;
   inProgress?: boolean;
   featured?: boolean;
