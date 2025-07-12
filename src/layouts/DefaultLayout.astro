@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
-import HeaderDock from '@/components/react/HeaderDock';
+import "../styles/global.css";
+import HeaderDock from "@/components/react/HeaderDock";
 
 export interface Props {
 	title?: string;
@@ -11,7 +11,7 @@ export interface Props {
 const {
 	title = "Rishit Reddy - Full Stack Developer & Software Engineer",
 	description = "Full Stack Developer specializing in modern web technologies. Expert in React, Node.js, TypeScript, and cloud solutions. Explore my projects, blog, and professional experience.",
-	image = "/profile-image.png"
+	image = "/favicon-32x32.png",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -22,21 +22,36 @@ const ogImage = new URL(image, Astro.site);
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		
+
 		<!-- Favicon and Icons -->
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicon-16x16.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/apple-touch-icon.png"
+		/>
 		<link rel="manifest" href="/site.webmanifest" />
-		
+
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
 		<meta name="author" content="Rishit Reddy" />
+		<meta property="og:image" content={ogImage} />
 		<link rel="canonical" href={canonicalURL} />
-		
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalURL} />
@@ -44,7 +59,7 @@ const ogImage = new URL(image, Astro.site);
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:site_name" content="Rishit Reddy" />
-		
+
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={canonicalURL} />
@@ -52,14 +67,16 @@ const ogImage = new URL(image, Astro.site);
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content={ogImage} />
 		<meta property="twitter:creator" content="@rishitreddy" />
-		
+
 		<script src="/js/smooth-scroll.js" defer></script>
 		<script src="https://tally.so/widgets/embed.js"></script>
 	</head>
 	<body class="min-h-screen bg-background text-foreground">
 		<main class="w-full max-w-screen-2xl mx-auto">
 			<!-- Content container with responsive widths -->
-			<div class="w-[90%] sm:w-[85%] md:w-[85%] lg:w-[80%] xl:w-[75%] mx-auto">
+			<div
+				class="w-[90%] sm:w-[85%] md:w-[85%] lg:w-[80%] xl:w-[75%] mx-auto"
+			>
 				<slot />
 			</div>
 		</main>
@@ -79,19 +96,21 @@ const ogImage = new URL(image, Astro.site);
 	:global(section) {
 		width: 100% !important;
 	}
-	
+
 	/* Mobile-specific overrides */
 	@media (max-width: 768px) {
 		:global(#herosection) {
 			padding-top: 0 !important;
 			margin-top: 0 !important;
-			min-height: calc(90vh - 48px) !important; /* Adjust for dock height */
+			min-height: calc(
+				90vh - 48px
+			) !important; /* Adjust for dock height */
 		}
 		:global(#herosection .relative) {
 			overflow: hidden;
 		}
 	}
-	
+
 	/* Ensure long names don't wrap in hero section */
 	:global(#herosection h1) {
 		overflow-wrap: normal;
