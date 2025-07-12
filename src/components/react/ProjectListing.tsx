@@ -61,41 +61,8 @@ export default function ProjectListing({ projects }: ProjectListingProps) {
     "Standalone / Educational"
   ];
 
-  // Debug: Log actual categories from projects data
-  const actualCategories = useMemo(() => {
-    const categories = new Set<string>();
-    projects.forEach(project => {
-      if (project.fields.projectCategory) {
-        const categoryType = typeof project.fields.projectCategory;
-        console.log(`Project: ${project.fields.title}, Category:`, project.fields.projectCategory, `(type: ${categoryType})`);
-        
-        // Handle different types of category data from Contentful
-        if (typeof project.fields.projectCategory === 'string') {
-          categories.add(project.fields.projectCategory);
-        } else if (Array.isArray(project.fields.projectCategory)) {
-          // If it's an array of category objects
-          project.fields.projectCategory.forEach(cat => {
-            if (typeof cat === 'string') {
-              categories.add(cat);
-            } else if (cat && cat.fields && cat.fields.name) {
-              categories.add(cat.fields.name);
-            }
-          });
-        } else if (project.fields.projectCategory && typeof project.fields.projectCategory === 'object') {
-          // If it's a single category object
-          if (project.fields.projectCategory.fields && project.fields.projectCategory.fields.name) {
-            categories.add(project.fields.projectCategory.fields.name);
-          }
-        }
-      }
-    });
-    console.log('All actual categories:', Array.from(categories));
-    return Array.from(categories);
-  }, [projects]);
-
   // Filter projects based on search query, technologies, and category
   const filteredProjects = useMemo(() => {
-    console.log('Filtering with selectedCategory:', selectedCategory);
     return projects.filter(project => {
       const matchesSearch = !searchQuery.trim() || 
         project.fields.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -131,8 +98,6 @@ export default function ProjectListing({ projects }: ProjectListingProps) {
 
       const projectCategories = getCategoryNames(project.fields.projectCategory);
       const matchesCategory = !selectedCategory || projectCategories.includes(selectedCategory);
-
-      console.log(`Project: ${project.fields.title}, Category:`, project.fields.projectCategory, `Categories: [${projectCategories.join(', ')}], Selected: "${selectedCategory}", Matches: ${matchesCategory}`);
 
       return matchesSearch && matchesTechnologies && matchesCategory;
     });
