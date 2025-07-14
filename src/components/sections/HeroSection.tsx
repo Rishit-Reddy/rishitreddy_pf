@@ -10,6 +10,7 @@ export default function Hero() {
     { label: "Projects", href: "#projects" },
     { label: "Experience", href: "#experience" },
     { label: "Skills", href: "#skills" },
+    {label: "Contact", href: "#contact"},
   ];
 
   const [mobileNavVisible, setMobileNavVisible] = useState(false);
