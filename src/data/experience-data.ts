@@ -17,12 +17,12 @@ export const experienceData: ExperienceData[] = [
     period: "July 2024 – December 2024",
     points: [
       "Built internal order management tools using FastAPI and MedusaJS.",
-      "Developed frontend in GatsbyJS and integrated JotForm-based workflows.",
+      "Developed frontend in NextJS and integrated JotForm-based workflows.",
       "Handled Stripe payment bugs and improved client checkout flow.",
-      "Worked with limited onboarding; adapted to MedusaJS + GatsbyJS independently.",
+      "Worked with limited onboarding; adapted to MedusaJS + NextJS independently.",
       "Communicated directly with clients and navigated scope changes in real-time."
     ],
-    skills: ["FastAPI", "GatsbyJS", "MedusaJS", "Stripe", "JotForm", "DigitalOcean"]
+    skills: ["FastAPI", "NextJS", "MedusaJS", "Stripe", "JotForm", "DigitalOcean"]
   },
   {
     company: "MocX",

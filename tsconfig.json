@@ -18,6 +18,10 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "types": ["react/jsx-runtime"],
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }
