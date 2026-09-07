@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import Navigation from '@/components/react/Navigation';
+import BottomNav from '@/components/react/BottomNav';
 
 export interface Props {
 	title?: string;
@@ -87,16 +87,14 @@ const ogImage = new URL(image, Astro.site);
 		<script data-goatcounter="https://rishitreddy.goatcounter.com/count"
 		        async src="//gc.zgo.at/count.js"></script>
 	</head>
-	<body class="min-h-screen bg-background text-foreground">
-		<!-- Project Navigation -->
-		<Navigation client:load />
-		
+	<body class="min-h-screen bg-background text-foreground pb-12">
 		<!-- Main Content with same padding as DefaultLayout -->
 		<main class="w-full max-w-screen-2xl mx-auto">
-			<div class="w-[90%] sm:w-[85%] md:w-[85%] lg:w-[80%] xl:w-[75%] mx-auto">
+			<div class="w-[92%] max-w-3xl mx-auto pt-6">
 				<slot />
 			</div>
 		</main>
+		<BottomNav currentPath={Astro.url.pathname} client:load />
 	</body>
 </html>
 

@@ -1,91 +1,51 @@
 ---
 import "../styles/global.css";
-import "../styles/divider.css";
 
 // Component Imports
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
-import PageLoader from "@/components/sections/PageLoader";
 import HeroSection from "@/components/sections/HeroSection"
 import ExperienceSection from "@/components/sections/ExperienceSection"
 import ProjectSection from "@/components/sections/ProjectSection"
 import SkillsSection from "@/components/sections/SkillsSection"
 import ContactSection from "@/components/sections/ContactSection"
-import { Toaster } from "@/components/ui/sonner"
-import HeaderDock from "@/components/react/HeaderDock";
-import MainNavigation from "@/components/react/MainNavigation";
-import { Separator } from "@/components/ui/separator";
-import { getBlogPosts, getPostBySlug, getProjects } from "@/lib/contentful";
+import { getProjects } from "@/lib/contentful";
 
 // SEO Meta Data
 const title = "Rishit Reddy - Full Stack Developer & Software Engineer";
 const description = "Full Stack Developer specializing in modern web technologies. Expert in React, Node.js, TypeScript, and cloud solutions. Explore my projects, blog, and professional experience.";
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Fetch data
 const projects = await getProjects();
 ---
 
 <DefaultLayout>
-  <PageLoader client:load>
-    <MainNavigation client:load />
-    <Toaster client:idle/>
-    <div class="w-full">
-      <section id="herosection" class="relative min-h-[60vh] md:min-h-[75vh] flex items-end md:items-end pt-4 md:pt-0">
-        <HeroSection client:load />
-      </section>
-    </div>
-    
-    <!-- Full-width divider that breaks out of container -->
-    <div class="relative w-full">
-      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
-        <Separator className="h-[2px] bg-border/80" client:load />
-      </div>
-    </div>
+  <section id="herosection" class="w-full">
+    <HeroSection client:load />
+  </section>
 
-    <section id="experience" class="relative min-h-[40vh] md:min-h-[50vh] w-full py-10">
-      <ExperienceSection client:visible />
-    </section>
-    
-    <!-- Full-width divider that breaks out of container -->
-    <div class="relative w-full">
-      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
-        <Separator className="h-[2px] bg-border/80" client:load />
-      </div>
-    </div>
-    
-    <section id="projects" class="relative min-h-[40vh] md:min-h-[50vh] w-full py-10">
-      <ProjectSection projects={projects} client:visible />
-    </section>
+  <section id="about" class="w-full py-5 border-t border-border">
+    <h2 class="text-xl font-bold mb-2">About</h2>
+    <p class="text-base text-muted-foreground leading-relaxed">
+      I'm currently doing my Master's in Machine Learning &amp; Image Analysis at Uppsala University,
+      following on from my bachelor's thesis on using data augmentation to improve MobileNet's
+      performance on handwritten signature identification. Below is a mix of what I've built and
+      the roles I've had along the way.
+    </p>
+  </section>
 
-    <!-- Full-width divider that breaks out of container -->
-    <div class="relative w-full">
-      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
-        <Separator className="h-[2px] bg-border/80" client:load />
-      </div>
-    </div>
+  <section id="experience" class="w-full py-5 border-t border-border">
+    <ExperienceSection client:visible />
+  </section>
 
-    <section id="skills" class="relative w-full">
-      <SkillsSection client:visible />
-    </section>
-    
-    <!-- Full-width divider that breaks out of container -->
-    <div class="relative w-full">
-      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
-        <Separator className="h-[2px] bg-border/80" client:load />
-      </div>
-    </div>
+  <section id="projects" class="w-full py-5 border-t border-border">
+    <ProjectSection projects={projects} client:visible />
+  </section>
 
-    <section id="contact" class="relative w-full">
-      <ContactSection client:visible />
-    </section>
-    
-    <!-- Full-width divider that breaks out of container -->
-    <div class="relative w-full">
-      <div class="absolute right-0 w-[99.6vw] -ml-[50vw] left-[50%]">
-        <Separator className="h-[2px] bg-border/80" client:load />
-      </div>
-    </div>
-    
-    <HeaderDock client:idle/>
-  </PageLoader>
+  <section id="skills" class="w-full py-5 border-t border-border">
+    <SkillsSection client:visible />
+  </section>
+
+  <section id="contact" class="w-full py-5 border-t border-border">
+    <ContactSection client:visible />
+  </section>
 </DefaultLayout>

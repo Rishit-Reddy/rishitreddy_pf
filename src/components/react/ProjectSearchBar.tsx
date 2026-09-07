@@ -100,7 +100,7 @@ export default function ProjectSearchBar({
 
       {/* Expandable Filters Section */}
       {showFilters && (
-        <div className="bg-card border border-border rounded-xl p-6 shadow-lg mb-6 animate-in slide-in-from-top-2 duration-300">
+        <div className="bg-card border border-border rounded-xl p-6 mb-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Category Filter */}
             {allCategories.length > 0 && (
@@ -140,10 +140,10 @@ export default function ProjectSearchBar({
                       <button
                         key={tech}
                         onClick={() => handleTechnologyToggle(tech)}
-                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${
+                        className={`px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${
                           selectedTechnologies.includes(tech)
-                            ? "bg-primary text-primary-foreground border-primary shadow-sm scale-95"
-                            : "bg-background text-foreground border-border hover:bg-secondary hover:border-secondary-foreground/20 hover:scale-105"
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "bg-background text-foreground border-border hover:bg-secondary"
                         }`}
                       >
                         {tech}

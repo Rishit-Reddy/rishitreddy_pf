@@ -17,28 +17,22 @@ const ContactSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="w-full py-16 md:py-24 bg-background text-foreground">
-      <div className="max-w-3xl mx-auto px-6 md:px-8">
-        <header className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-3">
-            Let’s Connect
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            Got an idea, a collaboration, or just want to say hi? Fill out the form below and I’ll get back to you soon.
-          </p>
-        </header>
+    <section className="w-full">
+      <h2 className="text-xl font-bold mb-1">Contact</h2>
+      <p className="text-base text-muted-foreground mb-3">
+        Got an idea, a collaboration, or just want to say hi? Use the form below.
+      </p>
 
-        <div className="bg-blue-50 dark:bg-blue-100 border border-border rounded-xl shadow-md p-6 md:p-8">
-          <iframe
-            data-tally-src="https://tally.so/embed/mJjZ67?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-            loading="lazy"
-            width="100%"
-            height="400"
-            title="Contact form"
-            className="w-full min-h-[400px]"
-            data-theme="auto"
-          />
-        </div>
+      <div className="border border-border rounded-lg p-3">
+        <iframe
+          data-tally-src="https://tally.so/embed/mJjZ67?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+          loading="lazy"
+          width="100%"
+          height="360"
+          title="Contact form"
+          className="w-full min-h-[360px]"
+          data-theme="auto"
+        />
       </div>
     </section>
   );

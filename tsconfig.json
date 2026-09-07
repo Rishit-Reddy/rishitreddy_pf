@@ -19,9 +19,10 @@
         "./src/*"
       ]
     },
-    "types": ["react/jsx-runtime"],
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["astro/client"]
   }
 }

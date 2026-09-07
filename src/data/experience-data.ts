@@ -6,15 +6,36 @@ export type ExperienceData = {
   logo: string;
   period: string;
   points: string[];
+  narrative: string;
   skills?: string[];
 };
 
+// NOTE: `narrative` is a first draft written from the `points` below — plain facts turned into
+// sentences, not real personal reflection. Rishit should read these and rewrite in his own voice.
+export const experienceIntro =
+  "Looking back at all of this, the common thread is that I've mostly learned by being thrown into things without a full playbook, whether that's a new stack, a new product, or a room full of stakeholders who need convincing.";
+
 export const experienceData: ExperienceData[] = [
+  {
+    company: "Axiogreen",
+    title: "Machine Learning Engineer (Intern)",
+    logo: "/logos/axiogreen.png",
+    period: "June 2026 – August 2026",
+    narrative:
+      "Axiogreen was an early-stage startup with a very lean team, so I ended up with a lot of ownership over the ML side of their building-automation platform, which controls how buildings get heated. The existing system was rule-based, and I worked on moving that decision-making toward a model predictive control approach instead, using a multilinear regression model to predict how the building would respond to different heating inputs. Before any of that could go near a real building, I designed a physics-based simulator built around an RC (resistance-capacitance) thermal model, which meant going through a fair number of peer-reviewed papers to get the modeling right.",
+    points: [
+      "Developed a predictive heating controller to optimize building energy use, transitioning from a rule-based system.",
+      "Created a physics-based building simulator for safe testing and validation of control algorithms."
+    ],
+    skills: ["Machine Learning", "Model Predictive Control", "Multilinear Regression", "Simulation"]
+  },
   {
     company: "NoGapps",
     title: "Full Stack Intern",
     logo: "/logos/nogapps.png",
     period: "July 2024 – December 2024",
+    narrative:
+      "At NoGapps I worked on internal order management tools built with FastAPI and MedusaJS. There wasn't much onboarding, so I picked up MedusaJS and Next.js mostly by reading docs and just building. I put together the frontend in Next.js, wired up JotForm-based workflows, and spent a good chunk of time chasing down Stripe checkout bugs. I also talked to clients directly, which meant the scope shifted more than once and I had to get comfortable adjusting on the fly.",
     points: [
       "Built internal order management tools using FastAPI and MedusaJS.",
       "Developed frontend in NextJS and integrated JotForm-based workflows.",
@@ -29,6 +50,8 @@ export const experienceData: ExperienceData[] = [
     title: "Co-Founder",
     logo: "/logos/mocx.png",
     period: "August 2021 – June 2023",
+    narrative:
+      "MocX was a mock interview platform I co-founded, built with React, Tailwind, Django, and GCP. I owned most of the product side: interview scheduling, feedback reporting, the whole session flow, plus integrating Razorpay for payments and running the PostgreSQL backend behind user data and feedback logs. I ran the user interviews myself and used what I heard to keep reworking the UX in Figma. It's probably the project that taught me the most about shipping something end to end, not just the code but the decisions around it.",
     points: [
       "Built a mock interview platform using React, Tailwind, Django, and GCP.",
       "Integrated Razorpay for secure payment handling.",
@@ -43,6 +66,8 @@ export const experienceData: ExperienceData[] = [
     title: "Chief Strategy Officer",
     logo: "/logos/ignite.png",
     period: "February 2022 – January 2023",
+    narrative:
+      "As Chief Strategy Officer at IGNITE SVUCE I led a cross-departmental sustainability initiative called Prakruthi Suraksha, and helped get Coding and Book Clubs running as regular weekly sessions. I pitched and helped implement a QR-based carbon offset tracking system, and spent a lot of time on the less technical side of things: growing club participation, planning events, and getting different stakeholders aligned behind one pitch. It was a good contrast to my technical work and taught me a lot about explaining ideas to people who don't think in code.",
     points: [
       "Led cross-departmental sustainability initiative 'Prakruthi Suraksha'.",
       "Helped set up Coding & Book Clubs with recurring weekly activities.",

@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import HeaderDock from "@/components/react/HeaderDock";
+import BottomNav from "@/components/react/BottomNav";
 
 export interface Props {
 	title?: string;
@@ -75,44 +75,22 @@ const ogImage = new URL(image, Astro.site);
 		<script data-goatcounter="https://rishitreddy.goatcounter.com/count"
 		        async src="//gc.zgo.at/count.js"></script>
 	</head>
-	<body class="min-h-screen bg-background text-foreground">
+	<body class="min-h-screen bg-background text-foreground pb-12">
 		<main class="w-full max-w-screen-2xl mx-auto">
 			<!-- Content container with responsive widths -->
 			<div
-				class="w-[90%] sm:w-[85%] md:w-[85%] lg:w-[80%] xl:w-[75%] mx-auto"
+				class="w-[92%] max-w-3xl mx-auto"
 			>
 				<slot />
 			</div>
 		</main>
+		<BottomNav currentPath={Astro.url.pathname} client:load />
 	</body>
 </html>
 
 <style>
-	/* This ensures our layout takes precedence */
-	:global(#herosection) {
-		width: 100% !important;
-	}
-	:global(#experience) {
-		width: 100% !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
-	}
 	:global(section) {
 		width: 100% !important;
-	}
-
-	/* Mobile-specific overrides */
-	@media (max-width: 768px) {
-		:global(#herosection) {
-			padding-top: 0 !important;
-			margin-top: 0 !important;
-			min-height: calc(
-				90vh - 48px
-			) !important; /* Adjust for dock height */
-		}
-		:global(#herosection .relative) {
-			overflow: hidden;
-		}
 	}
 
 	/* Ensure long names don't wrap in hero section */

@@ -36,9 +36,16 @@ export default function ProjectCard({ project, variant = 'square' }: ProjectCard
   const { title, slug, excerpt, technologies, projectType, institution, inProgress, githubUrl, liveUrl, hero_Image } = project.fields;
 
   if (variant === 'horizontal') {
+    const detailHref = `/projects/${slug}`;
     return (
-      <a href={`/projects/${slug}`} className="block group">
-        <article className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-primary/20 cursor-pointer">
+      <div
+        role="link"
+        tabIndex={0}
+        onClick={() => { window.location.href = detailHref; }}
+        onKeyDown={(e) => { if (e.key === 'Enter') window.location.href = detailHref; }}
+        className="block group cursor-pointer"
+      >
+        <article className="bg-card border border-border rounded-lg overflow-hidden hover:border-primary/30 transition-colors">
           <div className="flex flex-col sm:flex-row h-auto sm:h-64">
             {/* Hero Image */}
             {hero_Image?.fields?.image?.fields?.file?.url && (
@@ -46,7 +53,7 @@ export default function ProjectCard({ project, variant = 'square' }: ProjectCard
                 <img
                   src={`https:${encodeURI(hero_Image.fields.image.fields.file.url)}`}
                   alt={hero_Image.fields.altName || hero_Image.fields.image.fields.title || title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover"
                 />
               </div>
             )}
@@ -61,17 +68,17 @@ export default function ProjectCard({ project, variant = 'square' }: ProjectCard
                     </h2>
                     <div className="flex flex-wrap gap-2">
                       {projectType && (
-                        <span className="text-xs font-medium px-2 py-1 bg-blue-500/20 text-blue-600 dark:text-blue-400">
+                        <span className="text-xs font-medium px-2 py-1 rounded-full border border-border text-muted-foreground">
                           {projectType}
                         </span>
                       )}
                       {institution && projectType?.toLowerCase().includes('academic') && (
-                        <span className="text-xs font-medium px-2 py-1 bg-purple-500/20 text-purple-600 dark:text-purple-400">
+                        <span className="text-xs font-medium px-2 py-1 rounded-full border border-border text-muted-foreground">
                           {institution}
                         </span>
                       )}
                       {inProgress && (
-                        <span className="text-xs font-medium px-2 py-1 bg-yellow-500/20 text-yellow-600 dark:text-yellow-400">
+                        <span className="text-xs font-medium px-2 py-1 rounded-full border border-border text-muted-foreground">
                           In Progress
                         </span>
                       )}
@@ -91,7 +98,7 @@ export default function ProjectCard({ project, variant = 'square' }: ProjectCard
                     {technologies.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-200"
+                        className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-medium bg-muted text-muted-foreground"
                       >
                         {tech}
                       </span>
@@ -161,21 +168,21 @@ export default function ProjectCard({ project, variant = 'square' }: ProjectCard
             </div>
           </div>
         </article>
-      </a>
+      </div>
     )
   }
 
   // Square variant (default for featured projects)
   return (
     <a href={`/projects/${slug}`} className="block group">
-      <article className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-primary/20 cursor-pointer">
+      <article className="bg-card border border-border rounded-lg overflow-hidden hover:border-primary/30 transition-colors cursor-pointer">
         {/* Hero Image */}
         {hero_Image?.fields?.image?.fields?.file?.url && (
           <div className="aspect-video overflow-hidden">
             <img
               src={`https:${encodeURI(hero_Image.fields.image.fields.file.url)}`}
               alt={hero_Image.fields.altName || hero_Image.fields.image.fields.title || title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover"
             />
           </div>
         )}
@@ -189,17 +196,17 @@ export default function ProjectCard({ project, variant = 'square' }: ProjectCard
               </h2>
               <div className="flex flex-wrap gap-2">
                 {projectType && (
-                  <span className="text-xs font-medium px-2 py-1 bg-blue-500/20 text-blue-600 dark:text-blue-400">
+                  <span className="text-xs font-medium px-2 py-1 rounded-full border border-border text-muted-foreground">
                     {projectType}
                   </span>
                 )}
                 {institution && projectType?.toLowerCase().includes('academic') && (
-                  <span className="text-xs font-medium px-2 py-1 bg-purple-500/20 text-purple-600 dark:text-purple-400">
+                  <span className="text-xs font-medium px-2 py-1 rounded-full border border-border text-muted-foreground">
                     {institution}
                   </span>
                 )}
                 {inProgress && (
-                  <span className="text-xs font-medium px-2 py-1 bg-yellow-500/20 text-yellow-600 dark:text-yellow-400">
+                  <span className="text-xs font-medium px-2 py-1 rounded-full border border-border text-muted-foreground">
                     In Progress
                   </span>
                 )}
@@ -219,7 +226,7 @@ export default function ProjectCard({ project, variant = 'square' }: ProjectCard
               {technologies.slice(0, 5).map((tech) => (
                 <span
                   key={tech}
-                  className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-200"
+                  className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-medium bg-muted text-muted-foreground"
                 >
                   {tech}
                 </span>
