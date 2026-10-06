@@ -9,16 +9,24 @@ export default function SkillsSection() {
     <section className="w-full">
       <h2 className="text-xl font-bold mb-3">Skills</h2>
 
-      <div className="space-y-1.5 text-base">
+      <dl className="space-y-3">
         {categories.map((cat) => (
-          <div key={cat} className="flex flex-wrap gap-x-1.5 leading-snug">
-            <span className="font-semibold whitespace-nowrap">{cat}:</span>
-            <span className="text-muted-foreground">
-              {skills.filter((s) => s.category === cat).map((s) => s.name).join(", ")}
-            </span>
+          <div key={cat} className="grid gap-1.5 sm:grid-cols-[11rem_1fr] sm:gap-4">
+            <dt className="text-sm font-semibold sm:pt-0.5">{cat}</dt>
+            <dd>
+              <ul className="flex flex-wrap gap-1.5">
+                {skills
+                  .filter((s) => s.category === cat)
+                  .map((s) => (
+                    <li key={s.name} className="rounded-md bg-muted px-2 py-0.5 text-sm text-muted-foreground">
+                      {s.name}
+                    </li>
+                  ))}
+              </ul>
+            </dd>
           </div>
         ))}
-      </div>
+      </dl>
     </section>
   );
 }

@@ -6,14 +6,13 @@ export type ExperienceData = {
   logo: string;
   period: string;
   points: string[];
-  narrative: string;
+  narrative?: string;
   skills?: string[];
 };
 
 // NOTE: `narrative` is a first draft written from the `points` below — plain facts turned into
 // sentences, not real personal reflection. Rishit should read these and rewrite in his own voice.
-export const experienceIntro =
-  "Looking back at all of this, the common thread is that I've mostly learned by being thrown into things without a full playbook, whether that's a new stack, a new product, or a room full of stakeholders who need convincing.";
+// (The drafted `experienceIntro` paragraph was removed: it was not written by Rishit.)
 
 export const experienceData: ExperienceData[] = [
   {
@@ -66,15 +65,14 @@ export const experienceData: ExperienceData[] = [
     title: "Chief Strategy Officer",
     logo: "/logos/ignite.png",
     period: "February 2022 – January 2023",
-    narrative:
-      "As Chief Strategy Officer at IGNITE SVUCE I led a cross-departmental sustainability initiative called Prakruthi Suraksha, and helped get Coding and Book Clubs running as regular weekly sessions. I pitched and helped implement a QR-based carbon offset tracking system, and spent a lot of time on the less technical side of things: growing club participation, planning events, and getting different stakeholders aligned behind one pitch. It was a good contrast to my technical work and taught me a lot about explaining ideas to people who don't think in code.",
+    // Title line only on the homepage: no narrative, no skill badges.
     points: [
       "Led cross-departmental sustainability initiative 'Prakruthi Suraksha'.",
       "Helped set up Coding & Book Clubs with recurring weekly activities.",
       "Pitched and implemented QR-based carbon offset tracking system.",
       "Facilitated club growth, participation tracking, and event planning.",
       "Practiced stakeholder alignment, pitch delivery, and team collaboration."
-    ],
-    skills: ["Leadership", "Strategy", "Sustainability", "Public Speaking", "Team Management"]
+    ]
+    // Soft-skill badges removed so this renders as a single title line.
   }
 ];

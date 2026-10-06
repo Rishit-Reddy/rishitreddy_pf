@@ -1,11 +1,10 @@
 import { Badge } from "@/components/ui/badge";
-import { experienceData, experienceIntro } from "@/data/experience-data";
+import { experienceData } from "@/data/experience-data";
 
 export default function Experience() {
   return (
     <section className="w-full">
-      <h2 className="text-xl font-bold mb-2">Work Experience</h2>
-      <p className="text-base text-muted-foreground mb-4 leading-relaxed">{experienceIntro}</p>
+      <h2 className="text-xl font-bold mb-3">Experience</h2>
 
       <div className="space-y-5">
         {experienceData.map((job, index) => (
@@ -25,7 +24,9 @@ export default function Experience() {
               </div>
             ) : null}
 
-            <p className="mt-2 text-base text-muted-foreground leading-relaxed">{job.narrative}</p>
+            {job.narrative && (
+              <p className="mt-2 text-base text-muted-foreground leading-relaxed">{job.narrative}</p>
+            )}
           </div>
         ))}
       </div>

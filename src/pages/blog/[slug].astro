@@ -21,7 +21,7 @@ if (!post) {
 
 // SEO data preparation
 const title = `${post.fields.title} | Rishit Reddy's Blog`;
-const description = post.fields.excerpt || `Read "${post.fields.title}" on Rishit Reddy's blog. Insights on web development, technology, and software engineering.`;
+const description = post.fields.excerpt || `Read "${post.fields.title}" on Rishit Reddy's blog. Notes on image analysis, machine learning and building software.`;
 const heroImageUrl = post.fields.hero_Image?.fields?.image?.fields?.file?.url 
     ? `https:${post.fields.hero_Image.fields.image.fields.file.url}`
     : "/profile-image.png";

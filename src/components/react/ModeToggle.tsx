@@ -1,29 +1,39 @@
 import { useEffect, useState } from "react"
 import { Moon, Sun } from "lucide-react"
-import { Toggle } from "@/components/ui/toggle" 
+import { Toggle } from "@/components/ui/toggle"
+
+// Light is the default for everyone. Only an explicit click is saved, under a new key
+// (the old "theme" key was auto-written with "dark" on every visit, so it is ignored).
+const KEY = "theme-choice"
+
+function apply(theme: "light" | "dark") {
+  document.documentElement.classList.remove("light", "dark")
+  document.documentElement.classList.add(theme)
+}
 
 export default function ModeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark")
+  const [theme, setTheme] = useState<"light" | "dark">("light")
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme") as "light" | "dark" | null
-    const preferred = saved ?? "dark"
-    setTheme(preferred)
-    document.documentElement.classList.remove("light", "dark")
-    document.documentElement.classList.add(preferred)
+    let saved: string | null = null
+    try { saved = localStorage.getItem(KEY) } catch {}
+    const initial = saved === "dark" ? "dark" : "light"
+    setTheme(initial)
+    apply(initial)
   }, [])
 
-  useEffect(() => {
-    document.documentElement.classList.remove("light", "dark")
-    document.documentElement.classList.add(theme)
-    localStorage.setItem("theme", theme)
-  }, [theme])
+  function change(pressed: boolean) {
+    const next = pressed ? "dark" : "light"
+    setTheme(next)
+    apply(next)
+    try { localStorage.setItem(KEY, next) } catch {}
+  }
 
   return (
     <Toggle
       aria-label="Toggle theme"
       pressed={theme === "dark"}
-      onPressedChange={(pressed) => setTheme(pressed ? "dark" : "light")}
+      onPressedChange={change}
       className="rounded-full px-3 py-2 cursor-pointer"
     >
       {theme === "dark" ? (

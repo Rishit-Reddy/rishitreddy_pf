@@ -11,14 +11,30 @@ import ContactSection from "@/components/sections/ContactSection"
 import { getProjects } from "@/lib/contentful";
 
 // SEO Meta Data
-const title = "Rishit Reddy - Full Stack Developer & Software Engineer";
-const description = "Full Stack Developer specializing in modern web technologies. Expert in React, Node.js, TypeScript, and cloud solutions. Explore my projects, blog, and professional experience.";
+const title = "Rishit Reddy Palle – Image Analysis & Machine Learning, Uppsala University";
+const description = "MSc student in Image Analysis and Machine Learning at Uppsala University, looking for a digital pathology degree project from January 2027. Projects in cancer cell classification, classical image analysis and full-stack development.";
+
+// Structured data: facts only.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Rishit Reddy Palle",
+  url: Astro.site?.origin ?? "https://rishitreddy.com",
+  affiliation: { "@type": "CollegeOrUniversity", name: "Uppsala University" },
+  sameAs: [
+    "https://github.com/Rishit-Reddy",
+    "https://www.linkedin.com/in/rishit-reddy-palle/",
+  ],
+  knowsAbout: ["Image analysis", "Machine learning", "Digital pathology", "Web development"],
+};
 
 // Fetch data
 const projects = await getProjects();
 ---
 
-<DefaultLayout>
+<DefaultLayout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} slot="head" />
+
   <section id="herosection" class="w-full">
     <HeroSection client:load />
   </section>
@@ -26,22 +42,22 @@ const projects = await getProjects();
   <section id="about" class="w-full py-5 border-t border-border">
     <h2 class="text-xl font-bold mb-2">About</h2>
     <p class="text-base text-muted-foreground leading-relaxed">
-      I'm currently doing my Master's in Machine Learning &amp; Image Analysis at Uppsala University,
+      I'm currently doing my Master's in Image Analysis and Machine Learning at Uppsala University,
       following on from my bachelor's thesis on using data augmentation to improve MobileNet's
-      performance on handwritten signature identification. Below is a mix of what I've built and
-      the roles I've had along the way.
+      performance on handwritten signature identification. I'm looking for a degree project in
+      digital pathology starting January 2027.
     </p>
-    <a href="/journey" class="mt-3 inline-block text-sm underline underline-offset-4 hover:text-muted-foreground">
-      My master's journey →
+    <a href="/masters-journey" class="mt-3 inline-block text-base font-medium underline underline-offset-4 hover:text-muted-foreground">
+      Why digital pathology: my master's journey →
     </a>
-  </section>
-
-  <section id="experience" class="w-full py-5 border-t border-border">
-    <ExperienceSection client:visible />
   </section>
 
   <section id="projects" class="w-full py-5 border-t border-border">
     <ProjectSection projects={projects} client:visible />
+  </section>
+
+  <section id="experience" class="w-full py-5 border-t border-border">
+    <ExperienceSection client:visible />
   </section>
 
   <section id="skills" class="w-full py-5 border-t border-border">

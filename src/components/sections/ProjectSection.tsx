@@ -1,98 +1,40 @@
-interface Project {
-  fields: {
-    title: string;
-    slug: string;
-    excerpt: string;
-    technologies?: string[];
-    inProgress?: boolean;
-    projectType?: string;
-    institution?: string;
-    featured?: boolean;
-    githubUrl?: string;
-    liveUrl?: string;
-    hero_Image?: {
-      fields: {
-        image: {
-          fields: {
-            file: { url: string };
-            title?: string;
-          };
-        };
-        altName?: string;
-      };
-    };
-  };
-}
-
-function ProjectRow({ project, isResearch }: { project: Project; isResearch?: boolean }) {
-  const { title, slug, excerpt, technologies, githubUrl, liveUrl, hero_Image } = project.fields;
-  const imageUrl = hero_Image?.fields?.image?.fields?.file?.url;
-  const detailHref = `/projects/${slug}`;
-
-  return (
-    <div className="flex gap-4">
-      {imageUrl && (
-        <a href={detailHref} className="flex-shrink-0">
-          <img
-            src={`https:${encodeURI(imageUrl)}`}
-            alt={hero_Image?.fields?.altName || hero_Image?.fields?.image?.fields?.title || title}
-            className="w-28 h-20 md:w-36 md:h-24 object-cover rounded-md border border-border"
-          />
-        </a>
-      )}
-      <div className="min-w-0 flex-1">
-        <div className="flex items-baseline justify-between gap-2 flex-wrap">
-          <a href={detailHref} className="font-semibold text-base hover:underline">
-            {title}
-          </a>
-          <span className="flex gap-3 text-sm whitespace-nowrap">
-            {githubUrl && (
-              <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                GitHub
-              </a>
-            )}
-            {liveUrl && (
-              <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                {isResearch ? "Paper" : "Live"}
-              </a>
-            )}
-          </span>
-        </div>
-        {excerpt && <p className="text-sm text-muted-foreground mt-0.5 leading-snug">{excerpt}</p>}
-        {technologies && technologies.length > 0 && (
-          <p className="text-sm text-muted-foreground mt-0.5">{technologies.join(" · ")}</p>
-        )}
-      </div>
-    </div>
-  );
-}
+import ProjectRow, { buttonOutline, isResearch, type Project } from "@/components/react/ProjectRow";
 
 interface ProjectSectionProps {
   projects: Project[];
 }
 
+// Explicit homepage order. Slugs missing from Contentful are skipped, so no dead links.
+// Last entry is the one software project shown on the homepage.
+const HOMEPAGE_SLUGS = [
+  "multimodal-cancer-classification",
+  "thesis-mobilenet-signature",
+  "noisy-captcha-digit-recognition",
+  "cropneeds",
+];
+
+// Old behaviour, used only if none of HOMEPAGE_SLUGS exist: research first, then up to 3 featured.
+function fallbackProjects(projects: Project[]) {
+  const research = projects.filter(isResearch);
+  const rest = projects.filter((p) => !research.includes(p));
+  const featured = rest.filter((p) => p.fields.featured);
+  return [...research, ...(featured.length > 0 ? featured : rest).slice(0, 3)];
+}
+
 export default function ProjectSection({ projects }: ProjectSectionProps) {
-  const researchProjects = projects.filter(project =>
-    project.fields.slug === 'thesis-mobilenet-signature' ||
-    project.fields.projectType?.toLowerCase().includes('research') ||
-    project.fields.projectType?.toLowerCase().includes('thesis') ||
-    project.fields.title?.toLowerCase().includes('thesis') ||
-    project.fields.title?.toLowerCase().includes('research')
+  const bySlug = new Map(projects.map((p) => [p.fields.slug, p]));
+  const selected = HOMEPAGE_SLUGS.map((slug) => bySlug.get(slug)).filter(
+    (p): p is Project => Boolean(p)
   );
-  const featuredProjects = projects.filter(project =>
-    project.fields.featured && !researchProjects.includes(project)
-  );
-  const displayProjects = featuredProjects.length > 0
-    ? featuredProjects.slice(0, 3)
-    : projects.filter(project => !researchProjects.includes(project)).slice(0, 3);
+  const displayProjects = selected.length > 0 ? selected : fallbackProjects(projects);
 
   return (
     <section className="w-full">
       <div className="flex items-baseline justify-between mb-3">
-        <h2 className="text-xl font-bold">Projects & Research</h2>
+        <h2 className="text-xl font-bold">Research &amp; Selected Projects</h2>
         {projects.length > 0 && (
-          <a href="/projects" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            View all {projects.length} →
+          <a href="/projects" className={buttonOutline}>
+            View all {projects.length} projects →
           </a>
         )}
       </div>
@@ -100,10 +42,7 @@ export default function ProjectSection({ projects }: ProjectSectionProps) {
       {projects.length === 0 ? (
         <p className="text-base text-muted-foreground">Projects are coming soon!</p>
       ) : (
-        <div className="space-y-4">
-          {researchProjects.map((project) => (
-            <ProjectRow key={project.fields.slug} project={project} isResearch />
-          ))}
+        <div className="space-y-6">
           {displayProjects.map((project) => (
             <ProjectRow key={project.fields.slug} project={project} />
           ))}

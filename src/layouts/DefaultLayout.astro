@@ -9,8 +9,8 @@ export interface Props {
 }
 
 const {
-	title = "Rishit Reddy - Full Stack Developer & Software Engineer",
-	description = "Full Stack Developer specializing in modern web technologies. Expert in React, Node.js, TypeScript, and cloud solutions. Explore my projects, blog, and professional experience.",
+	title = "Rishit Reddy Palle – Image Analysis & Machine Learning, Uppsala University",
+	description = "MSc student in Image Analysis and Machine Learning at Uppsala University, looking for a digital pathology degree project from January 2027. Projects in cancer cell classification, classical image analysis and full-stack development.",
 	image = "/og-icon-1200x1200.png",
 } = Astro.props;
 
@@ -69,8 +69,9 @@ const ogImage = new URL(image, Astro.site);
 		<meta property="twitter:creator" content="@rishitreddy" />
 
 		<script src="/js/smooth-scroll.js" defer></script>
-		<script src="https://tally.so/widgets/embed.js"></script>
 		
+		<slot name="head" />
+
 		<!-- GoatCounter Analytics -->
 		<script data-goatcounter="https://rishitreddy.goatcounter.com/count"
 		        async src="//gc.zgo.at/count.js"></script>

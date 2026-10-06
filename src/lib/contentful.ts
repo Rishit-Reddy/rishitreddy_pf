@@ -86,7 +86,8 @@ export async function getPostBySlug(slug: string) {
 export async function getProjects() {
   const entries = await client.getEntries({ 
     content_type: 'project', 
-    include: 2
+    include: 2,
+    order: ['sys.createdAt'], // deterministic order across builds
   });
   return entries.items as unknown as Array<{ fields: ProjectFields }>;
 }

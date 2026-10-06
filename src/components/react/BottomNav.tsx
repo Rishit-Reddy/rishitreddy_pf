@@ -4,11 +4,10 @@ import { Github, Linkedin, Mail } from "lucide-react"
 const EMAIL = "rishitpalle@gmail.com"
 
 const links = [
-  { label: "Home", href: "/", match: (p: string) => p === "/" },
   { label: "About", href: "/#about" },
-  { label: "Experience", href: "/#experience" },
+  { label: "Journey", href: "/masters-journey", match: (p: string) => p.startsWith("/masters-journey") },
   { label: "Projects", href: "/projects", match: (p: string) => p.startsWith("/projects") },
-  { label: "Skills", href: "/#skills" },
+  { label: "Experience", href: "/#experience" },
   { label: "Blog", href: "/blog", match: (p: string) => p.startsWith("/blog") },
   { label: "Contact", href: "/#contact" },
 ]

@@ -8,8 +8,14 @@ export default function Hero() {
           <h1 className="text-4xl md:text-5xl font-bold leading-tight">
             Rishit Reddy Palle
           </h1>
-          <p className="text-lg text-muted-foreground mt-2">
-            Full-stack developer · Master's student in Machine Learning & Image Analysis, Uppsala University
+          <p className="text-xl font-medium mt-2">
+            MSc student in Image Analysis and Machine Learning
+          </p>
+          <p className="text-base text-muted-foreground mt-0.5">
+            Uppsala University<span className="hidden sm:inline"> · </span><span className="block sm:inline">Background in full-stack development</span>
+          </p>
+          <p className="inline-block rounded-lg border border-border bg-muted px-3 py-1 text-sm mt-3">
+            Looking for a digital pathology degree project from January 2027
           </p>
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 mt-4 text-base">
             <a href="https://github.com/Rishit-Reddy" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-[#181717] dark:text-white hover:opacity-75 transition-opacity">
