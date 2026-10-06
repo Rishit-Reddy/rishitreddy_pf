@@ -33,7 +33,7 @@ export default function ProjectSection({ projects }: ProjectSectionProps) {
       <div className="flex items-baseline justify-between mb-3">
         <h2 className="text-xl font-bold">Research &amp; Selected Projects</h2>
         {projects.length > 0 && (
-          <a href="/projects" className={buttonOutline}>
+          <a href="/projects" className={`${buttonOutline} max-md:hidden`}>
             View all {projects.length} projects →
           </a>
         )}
@@ -42,10 +42,13 @@ export default function ProjectSection({ projects }: ProjectSectionProps) {
       {projects.length === 0 ? (
         <p className="text-base text-muted-foreground">Projects are coming soon!</p>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           {displayProjects.map((project) => (
             <ProjectRow key={project.fields.slug} project={project} />
           ))}
+          <a href="/projects" className={`${buttonOutline} flex w-full justify-center py-2.5 md:hidden`}>
+            View all {projects.length} projects →
+          </a>
         </div>
       )}
     </section>

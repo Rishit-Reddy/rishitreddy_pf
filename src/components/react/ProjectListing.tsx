@@ -145,7 +145,7 @@ export default function ProjectListing({ projects }: ProjectListingProps) {
                     {group.heading}{" "}
                     <span className="text-sm font-normal text-muted-foreground">({group.items.length})</span>
                   </h2>
-                  <div className="space-y-6">
+                  <div className="space-y-4 md:space-y-6">
                     {group.items.map((project) => (
                       <ProjectRow key={project.fields.slug} project={project} showMeta />
                     ))}

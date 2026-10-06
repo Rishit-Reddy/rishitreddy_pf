@@ -43,7 +43,7 @@ export default function ProjectSearchBar({
       </div>
 
       {categories.length > 0 && (
-        <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2">
+        <div role="group" aria-label="Filter by category" className="scrollbar-hide -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 [&>button]:shrink-0 [&>button]:whitespace-nowrap">
           {["", ...categories].map((category) => {
             const selected = selectedCategory === category;
             return (
