@@ -2,8 +2,8 @@ import { Github, Linkedin } from "lucide-react";
 
 export default function Hero() {
   return (
-    <div className="pt-16 md:pt-24">
-      <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12 w-full">
+    <div className="md:pt-24">
+      <div className="flex flex-col-reverse md:flex-row items-center gap-6 md:gap-12 w-full">
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-bold leading-tight">
             Rishit Reddy Palle
@@ -28,11 +28,17 @@ export default function Hero() {
           </div>
         </div>
 
-        <img
-          src="/profile-image.png"
-          alt="Rishit Reddy Palle"
-          className="w-40 md:w-56 h-auto rounded-2xl flex-shrink-0"
-        />
+        <picture className="block w-screen md:w-56 flex-shrink-0">
+          {/* Phones get the wide outdoor photo; desktop keeps the cut-out portrait. */}
+          <source media="(min-width: 768px)" srcSet="/profile-image.png" />
+          <img
+            src="/mobile-photo.jpg"
+            alt="Rishit Reddy Palle smiling outdoors against a blue sky"
+            width="1600"
+            height="746"
+            className="w-full aspect-[3/2] object-cover object-center md:aspect-auto md:h-auto md:rounded-2xl"
+          />
+        </picture>
       </div>
     </div>
   );
