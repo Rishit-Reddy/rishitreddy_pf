@@ -2,7 +2,7 @@
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
 import { getProjects } from "@/lib/contentful";
 
-const title = "From signatures to cells - Rishit Reddy";
+const title = "My Master's Journey So Far - Rishit Reddy";
 const description =
   "A first-person account of my master's path in image analysis and machine learning, and why I'm aiming at digital pathology.";
 
@@ -26,24 +26,24 @@ const linkClass = "underline underline-offset-4 hover:text-muted-foreground";
       ← Home
     </a>
 
-    <h1 class="mb-8 text-3xl md:text-4xl font-bold leading-tight text-foreground">From signatures to cells</h1>
+    <h1 class="mb-8 text-3xl md:text-4xl font-bold leading-tight text-foreground">My Master's Journey So Far</h1>
 
     <p>
       My bachelor's thesis was about data augmentation for signature identification with MobileNet{bachelor && <> (<a href={bachelor} class={linkClass}>read more</a>)</>}. Our skills were limited, so after talking to our supervisor we kept it to images with machine learning on top. I don't remember why we picked signatures, but I do remember why I stayed with images. I liked the maths of how CNNs work, and it felt a bit magical that the first layers pick up edges and textures without anyone telling them to. So I went looking for a master's in it, and I ended up in Image Analysis and Machine Learning at Uppsala.
     </p>
 
     <p>
-      The first course, Introduction to Image Analysis, taught me the classical pipeline, from filtering and the Fourier domain to segmentation. Our mini project was reading CAPTCHAs with no deep learning allowed. Our first attempt split each image into four equal slots and only got 56.4% on the test set. Then we cleaned out the stripes with an FFT notch filter, predicted the digit count first and added a specialist for 3 versus 5. That got us to 92.2%, and our group of two came first{captcha && <> (<a href={captcha} class={linkClass}>read more</a>)</>}.
+      The first course, <strong>Introduction to Image Analysis</strong>, taught me the classical pipeline, from filtering and the Fourier domain to segmentation. Our mini project was reading CAPTCHAs with no deep learning allowed. Our first attempt split each image into four equal slots and only got 56.4% on the test set. Then we cleaned out the stripes with an FFT notch filter, predicted the digit count first and added a specialist for 3 versus 5. That got us to 92.2%, and our group of two came first{captcha && <> (<a href={captcha} class={linkClass}>read more</a>)</>}.
     </p>
 
     <p>
-      Deep Learning gave me the maths underneath neural networks, and building CNNs from scratch in NumPy is where it finally made sense to me. Digital Imaging Systems gave me the physics of how X-ray, MRI and microscopes make an image, and the lesson I kept is to get a better image at the source instead of fixing a bad one later.
+      <strong>Deep Learning</strong> gave me the maths underneath neural networks, and building CNNs from scratch in NumPy is where it finally made sense to me. <strong>Digital Imaging Systems</strong> gave me the physics of how X-ray, MRI and microscopes make an image, and the lesson I kept is to get a better image at the source instead of fixing a bad one later.
     </p>
 
     <h2 class="mt-12 mb-4 text-xl md:text-2xl font-bold leading-snug text-foreground">The project that changed my direction</h2>
 
     <p>
-      The course that mattered most was Advanced Deep Learning for Image Processing. The project I care about there was classifying cells as coming from cancer patients or healthy ones, using two kinds of microscope images of oral brush samples. There were only 19 patients and one label per patient, so we had to split by patient, and I also checked whether the CNN was learning who the patient was instead of the disease. It was, strongly, and augmentation only partly fixed it. Our validation AUC was 0.91, but we got 0.78 on the public test set and placed ninth, because with so few patients the validation score couldn't be trusted. Not great, but 0.78 was ours.
+      The course that mattered most was <strong>Advanced Deep Learning for Image Processing</strong>. The project I care about there was classifying cells as coming from cancer patients or healthy ones, using two kinds of microscope images of oral brush samples. There were only 19 patients and one label per patient, so we had to split by patient, and I also checked whether the CNN was learning who the patient was instead of the disease. It was, strongly, and augmentation only partly fixed it. Our validation AUC was 0.91, but we got 0.78 on the public test set and placed ninth, because with so few patients the validation score couldn't be trusted. Not great, but 0.78 was ours.
     </p>
 
     <p>
