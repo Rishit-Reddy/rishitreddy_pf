@@ -15,7 +15,7 @@ const links = [
 
 export default function BottomNav({ currentPath = "/" }: { currentPath?: string }) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-muted">
       <div className="mx-auto flex max-w-3xl items-center gap-4 overflow-x-auto whitespace-nowrap px-4 py-2 text-sm">
         {links.map((l) => (
           <a
