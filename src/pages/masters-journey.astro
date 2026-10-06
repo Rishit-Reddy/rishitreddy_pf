@@ -29,7 +29,7 @@ const linkClass = "underline underline-offset-4 hover:text-muted-foreground";
     <h1 class="mb-8 text-3xl md:text-4xl font-bold leading-tight text-foreground">My Master's Journey So Far</h1>
 
     <p>
-      My bachelor's thesis was about data augmentation for signature identification with MobileNet{bachelor && <> (<a href={bachelor} class={linkClass}>read more</a>)</>}. Our skills were limited, so after talking to our supervisor we kept it to images with machine learning on top. I don't remember why we picked signatures, but I do remember why I stayed with images. I liked the maths of how CNNs work, and it felt a bit magical that the first layers pick up edges and textures without anyone telling them to. So I went looking for a master's in it, and I ended up in Image Analysis and Machine Learning at Uppsala.
+      My bachelor's thesis was about data augmentation for signature identification with MobileNet{bachelor && <> (<a href={bachelor} class={linkClass}>read more</a>)</>}. My peers and I had limited skills, so after discussing with our supervisor we kept it to images with machine learning on top. I don't remember why we picked signatures, but I do remember why I stayed with images. I found the maths behind how CNNs work interesting, and it felt a bit magical that the first layers pick up edges and textures without anyone telling them to. So I went looking for a master's in it, and I ended up in Image Analysis and Machine Learning at Uppsala.
     </p>
 
     <img
@@ -42,17 +42,17 @@ const linkClass = "underline underline-offset-4 hover:text-muted-foreground";
     />
 
     <p>
-      The first course, <strong>Introduction to Image Analysis</strong>, taught me the classical pipeline, from filtering and the Fourier domain to segmentation. Our mini project was reading CAPTCHAs with no deep learning allowed. Our first attempt split each image into four equal slots and only got 56.4% on the test set. Then we cleaned out the stripes with an FFT notch filter, predicted the digit count first and added a specialist for 3 versus 5. That got us to 92.2%, and our group of two came first{captcha && <> (<a href={captcha} class={linkClass}>read more</a>)</>}.
+      The first course, <strong>Introduction to Image Analysis</strong>, taught me the classical pipeline, from filtering and the Fourier domain to segmentation. The mini project was reading CAPTCHAs with no deep learning allowed. Our first attempt split each image into four equal slots and only got 56.4% on the test set. Then we cleaned out the stripes with an FFT notch filter, predicted the digit count first and added a specialist for 3 versus 5. That got us to 92.2%, and our group of two came first{captcha && <> (<a href={captcha} class={linkClass}>read more</a>)</>}.
     </p>
 
     <p>
-      <strong>Deep Learning</strong> gave me the maths underneath neural networks, and building CNNs from scratch in NumPy is where it finally made sense to me. <strong>Digital Imaging Systems</strong> gave me the physics of how X-ray, MRI and microscopes make an image, and the lesson I kept is to get a better image at the source instead of fixing a bad one later.
+      <strong>Deep Learning</strong> helped me understand the maths underneath neural networks, and building CNNs from scratch in NumPy is where it finally made sense to me. <strong>Digital Imaging Systems</strong> gave me the physics of how X-ray, MRI and microscopes make an image, and the lesson I kept is to get a better image at the source instead of fixing a bad one later.
     </p>
 
     <h2 class="mt-12 mb-4 text-xl md:text-2xl font-bold leading-snug text-foreground">The project that changed my direction</h2>
 
     <p>
-      The course that mattered most was <strong>Advanced Deep Learning for Image Processing</strong>. The project I care about there was classifying cells as coming from cancer patients or healthy ones, using two kinds of microscope images of oral brush samples. There were only 19 patients and one label per patient, so we had to split by patient, and I also checked whether the CNN was learning who the patient was instead of the disease. It was, strongly, and augmentation only partly fixed it. Our validation AUC was 0.91, but we got 0.78 on the public test set and placed ninth, because with so few patients the validation score couldn't be trusted. Not great, but 0.78 was ours.
+      The course that mattered most was <strong>Advanced Deep Learning for Image Processing</strong>. The project I value most there was classifying cells as coming from cancer patients or healthy ones, using two kinds of microscope images of oral brush samples. There were only 19 patients and one label per patient, so we had to split by patient, and I also checked whether the CNN was learning to recognise each patient instead of the disease. It was, and quite strongly. Data augmentation reduced this only partly. Our validation AUC was 0.91, but we got 0.78 on the public test set and placed ninth, because with so few patients the validation score couldn't be trusted. Not great, but 0.78 was ours.
     </p>
 
     <p>
@@ -66,11 +66,11 @@ const linkClass = "underline underline-offset-4 hover:text-muted-foreground";
     </p>
 
     <p>
-      I'm currently also taking <strong>Software Development</strong>, another course in my program. My team and I are working with the Department of Radiology at Uppsala University to build a library that helps researchers working with images, radiology images for now, publish their results in an interactive way. We forked Streamlit and are building on top of its core, so readers can scroll through MRI and CT images and interact with the graphs, and researchers can design their own publishing page in Python instead of showing a video. It isn't pathology, but it is the software side of working with medical images, and I'm glad to be building it.
+      At present, I am taking a course on <strong>Software Development</strong>, another part of my program. My team and I are working with the Department of Radiology at Uppsala University to build a library that helps researchers working with images, radiology images for now, publish their results in an interactive way. We forked Streamlit and are building on top of its core, so readers can scroll through MRI and CT images and interact with the graphs, and researchers can design their own publishing page in Python instead of showing a video. It isn't pathology, but it is the software side of working with medical images, and I'm glad to be building it.
     </p>
 
     <p>
-      I don't know yet what comes after the master's. Right now I'm looking for a degree project for my thesis, starting in January 2027, in digital pathology and ideally something cancer related and well scoped. I want to learn the field properly and, hopefully, contribute something meaningful to a real research project.
+      I don't know yet what comes after my master's. Right now I'm looking for a degree project for my thesis, starting in January 2027, in digital pathology and ideally something cancer related that is well-scoped. I seek to explore this field further and, hopefully, contribute something meaningful to a real research project.
     </p>
   </article>
 </DefaultLayout>
